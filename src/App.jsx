@@ -11,23 +11,21 @@ function App() {
   };
 
   const editTodo = (id, todo) => {
-    setTodos((prevTodo) => {
-      prevTodo.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo));
-    });
+    setTodos((prevTodo) =>
+      prevTodo.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo)),
+    );
   };
 
   const deleteTodo = (id) => {
-    setTodos((prevTodo) => {
-      prevTodo.filter((todo) => todo.id !== id);
-    });
+    setTodos((prevTodo) => prevTodo.filter((todo) => todo.id !== id));
   };
 
-  const ToggleComplete = (id) => {
-    setTodos((prevTodo) => {
+  const toggleComplete = (id) => {
+    setTodos((prevTodo) =>
       prevTodo.map((todo) =>
-        todo.id === id ? { ...todo, completed: !prevTodo.completed } : todo,
-      );
-    });
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
   };
 
   useEffect(() => {
@@ -44,7 +42,7 @@ function App() {
 
   return (
     <TodoProvider
-      value={(todos, addTodo, editTodo, deleteTodo, ToggleComplete)}
+      value={{ todos, addTodo, editTodo, deleteTodo, toggleComplete }}
     >
       <div className="bg-[#172842] min-h-screen py-8">
         <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 bg-teal-700 text-white">
@@ -68,5 +66,4 @@ function App() {
     </TodoProvider>
   );
 }
-
 export default App;
